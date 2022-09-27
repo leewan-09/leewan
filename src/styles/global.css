@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  background-color: hsla(225, 5%, 15%, 1);
+  background-color: linear-gradient(
+    90deg,
+    hsla(225, 5%, 15%, 1) 0%,
+    hsla(213, 10%, 17%, 1) 100%
+  );
+  color: white;
+}
