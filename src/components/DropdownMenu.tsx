@@ -8,7 +8,7 @@ const DropdownMenu: React.FC = () => {
     <div className="md:hidden">
       <Menu>
         <Menu.Button
-          className="hover:text-primary text-2xl pl-2"
+          className="hover:text-primary text-2xl pl-2 focus:outline-none outline-none"
           aria-label="Menu"
         >
           <BsThreeDotsVertical />
@@ -25,17 +25,17 @@ const DropdownMenu: React.FC = () => {
           <Menu.Items className="absolute bg-zinc-700 right-6  w-40 origin-top-right rounded-md shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="p-2">
               <Menu.Item>
-                <button className="hover:text-primary transition-colors text-left w-full p-1">
+                <button className="hover:text-primary transition-colors text-left w-full text-sm p-1">
                   Home
                 </button>
               </Menu.Item>
               <Menu.Item>
-                <button className="hover:text-primary transition-colors text-left w-full p-1">
+                <button className="hover:text-primary transition-colors text-left w-full text-sm p-1">
                   About me
                 </button>
               </Menu.Item>
               <Menu.Item>
-                <button className="hover:text-primary transition-colors text-left w-full p-1">
+                <button className="hover:text-primary transition-colors text-left w-full text-sm p-1">
                   Showcase
                 </button>
               </Menu.Item>
