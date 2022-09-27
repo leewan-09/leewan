@@ -1,5 +1,9 @@
 import type React from 'react';
-import { AiFillGithub, AiFillLinkedin, AiOutlineTwitter } from 'react-icons/ai';
+import {
+  AiFillGithub,
+  AiFillLinkedin,
+  AiOutlineTwitter,
+} from 'react-icons/ai/index';
 import DropdownMenu from './DropdownMenu';
 
 const Navbar: React.FC = () => {

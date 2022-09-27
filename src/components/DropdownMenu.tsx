@@ -1,6 +1,6 @@
 import type React from 'react';
 import { Fragment } from 'react';
-import { BsThreeDotsVertical } from 'react-icons/bs';
+import { BsThreeDotsVertical } from 'react-icons/bs/index';
 import { Menu, Transition } from '@headlessui/react';
 
 const DropdownMenu: React.FC = () => {
