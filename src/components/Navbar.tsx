@@ -1,5 +1,6 @@
 import type React from 'react';
 import { AiFillGithub, AiFillLinkedin, AiOutlineTwitter } from 'react-icons/ai';
+import DropdownMenu from './DropdownMenu';
 
 const Navbar: React.FC = () => {
   return (
@@ -41,23 +42,29 @@ const Navbar: React.FC = () => {
         </div>
         <div>
           <div className="flex">
-            <a href="https://github.com/leewan-09" target="_blank" className="">
+            <a
+              href="https://github.com/leewan-09"
+              target="_blank"
+              className="pr-2"
+            >
               <AiFillGithub className="hover:text-primary transition-colors text-xl" />
             </a>
             <a
               href="https://twitter.com/leewan98"
               target="_blank"
-              className="px-3"
+              className="px-2"
             >
               <AiOutlineTwitter className="hover:text-primary transition-colors text-xl" />
             </a>
             <a
               href="https://www.linkedin.com/in/ahmed-leevan-b02b91240/"
               target="_blank"
-              className=""
+              className="md:px-2 pl-2"
             >
               <AiFillLinkedin className="hover:text-primary transition-colors text-xl" />
             </a>
+
+            <DropdownMenu />
           </div>
         </div>
       </div>
