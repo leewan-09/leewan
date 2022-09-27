@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
             <div className="h-[2px] bg-white group-hover:bg-primary transition-all ease-in-out"></div>
           </div>
         </div>
-        <div className="text-sm hidden md:flex">
+        <div className="text-base hidden md:flex">
           <a
             href="/"
             className="px-2 md:px-5 hover:text-primary transition-colors"
@@ -49,6 +49,7 @@ const Navbar: React.FC = () => {
             <a
               href="https://github.com/leewan-09"
               target="_blank"
+              aria-label="Github"
               className="pr-2"
             >
               <AiFillGithub className="hover:text-primary transition-colors text-xl" />
@@ -56,6 +57,7 @@ const Navbar: React.FC = () => {
             <a
               href="https://twitter.com/leewan98"
               target="_blank"
+              aria-label="Twitter"
               className="px-2"
             >
               <AiOutlineTwitter className="hover:text-primary transition-colors text-xl" />
@@ -63,6 +65,7 @@ const Navbar: React.FC = () => {
             <a
               href="https://www.linkedin.com/in/ahmed-leevan-b02b91240/"
               target="_blank"
+              aria-label="Linkedin"
               className="md:px-2 pl-2"
             >
               <AiFillLinkedin className="hover:text-primary transition-colors text-xl" />

@@ -5,9 +5,12 @@ import { Menu, Transition } from '@headlessui/react';
 
 const DropdownMenu: React.FC = () => {
   return (
-    <>
+    <div className="md:hidden">
       <Menu>
-        <Menu.Button className="hover:text-primary text-xl pl-2 md:hidden">
+        <Menu.Button
+          className="hover:text-primary text-xl pl-2"
+          aria-label="Menu"
+        >
           <BsThreeDotsVertical />
         </Menu.Button>
         <Transition
@@ -19,14 +22,28 @@ const DropdownMenu: React.FC = () => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <Menu.Item>
-              <button>Home</button>
-            </Menu.Item>
+          <Menu.Items className="absolute bg-zinc-700 right-6  w-40 origin-top-right rounded-md shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="p-2">
+              <Menu.Item>
+                <button className="hover:text-primary transition-colors text-left w-full p-1">
+                  Home
+                </button>
+              </Menu.Item>
+              <Menu.Item>
+                <button className="hover:text-primary transition-colors text-left w-full p-1">
+                  About me
+                </button>
+              </Menu.Item>
+              <Menu.Item>
+                <button className="hover:text-primary transition-colors text-left w-full p-1">
+                  Showcase
+                </button>
+              </Menu.Item>
+            </div>
           </Menu.Items>
         </Transition>
       </Menu>
-    </>
+    </div>
   );
 };
 
