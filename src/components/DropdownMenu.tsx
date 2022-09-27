@@ -8,7 +8,7 @@ const DropdownMenu: React.FC = () => {
     <div className="md:hidden">
       <Menu>
         <Menu.Button
-          className="hover:text-primary text-xl pl-2"
+          className="hover:text-primary text-2xl pl-2"
           aria-label="Menu"
         >
           <BsThreeDotsVertical />

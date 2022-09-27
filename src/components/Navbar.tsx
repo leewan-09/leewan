@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
               aria-label="Github"
               className="pr-2"
             >
-              <AiFillGithub className="hover:text-primary transition-colors text-xl" />
+              <AiFillGithub className="hover:text-primary transition-colors text-2xl" />
             </a>
             <a
               href="https://twitter.com/leewan98"
@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
               aria-label="Twitter"
               className="px-2"
             >
-              <AiOutlineTwitter className="hover:text-primary transition-colors text-xl" />
+              <AiOutlineTwitter className="hover:text-primary transition-colors text-2xl" />
             </a>
             <a
               href="https://www.linkedin.com/in/ahmed-leevan-b02b91240/"
@@ -68,7 +68,7 @@ const Navbar: React.FC = () => {
               aria-label="Linkedin"
               className="md:px-2 pl-2"
             >
-              <AiFillLinkedin className="hover:text-primary transition-colors text-xl" />
+              <AiFillLinkedin className="hover:text-primary transition-colors text-2xl" />
             </a>
 
             <DropdownMenu />
