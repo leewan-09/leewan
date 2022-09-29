@@ -1,0 +1,82 @@
+---
+import {
+  AiFillGithub,
+  AiFillLinkedin,
+  AiOutlineTwitter,
+} from 'react-icons/ai/index';
+import DropdownMenu from './DropdownMenu';
+---
+
+<nav class="max-w-screen-xl w-full h-14 m-auto px-6">
+  <div class="flex h-full justify-between items-center">
+    <div class="flex text-xl font-semibold tracking-wider group cursor-pointer">
+      <div class="flex flex-col">
+        <div class="group-hover:text-primary transition-all ease-in-out">
+          LEE
+        </div>
+        <div
+          class="h-[2px] bg-primary group-hover:bg-white transition-all ease-in-out"
+        >
+        </div>
+      </div>
+      <div class="flex flex-col">
+        <div
+          class="text-primary group-hover:text-white transition-all ease-in-out"
+        >
+          WAN
+        </div>
+        <div
+          class="h-[2px] bg-white group-hover:bg-primary transition-all ease-in-out"
+        >
+        </div>
+      </div>
+    </div>
+    <div class="text-base hidden md:flex">
+      <a href="/" class="px-2 md:px-5 hover:text-primary transition-colors">
+        Home
+      </a>
+      <a href="/" class="px-2 md:px-5 hover:text-primary transition-colors">
+        About me
+      </a>
+      <a href="/" class="px-2 md:px-5 hover:text-primary transition-colors">
+        Showcase
+      </a>
+    </div>
+    <div>
+      <div class="flex">
+        <a
+          href="https://github.com/leewan-09"
+          target="_blank"
+          aria-label="Github"
+          class="pr-2"
+        >
+          <AiFillGithub
+            className="hover:text-primary transition-colors text-2xl"
+          />
+        </a>
+        <a
+          href="https://twitter.com/leewan98"
+          target="_blank"
+          aria-label="Twitter"
+          class="px-2"
+        >
+          <AiOutlineTwitter
+            className="hover:text-primary transition-colors text-2xl"
+          />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/ahmed-leevan-b02b91240/"
+          target="_blank"
+          aria-label="Linkedin"
+          class="md:px-2 pl-2"
+        >
+          <AiFillLinkedin
+            className="hover:text-primary transition-colors text-2xl"
+          />
+        </a>
+
+        <DropdownMenu client:idle />
+      </div>
+    </div>
+  </div>
+</nav>
