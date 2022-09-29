@@ -1,44 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import HomeSection from '../components/HomeSection.astro';
 ---
 
 <Layout title="Leewan">
-  <section class="mt-40">
-    <div class="flex flex-col md:w-3/4">
-      <div
-        class="bg-[url('/img/wavy-line.svg')] bg-no-repeat w-full h-4 rotate-180 mb-6 opacity-80"
-      >
-      </div>
-      <div class="flex text-lg text-white/70 font-medium max-w-3xl">
-        Hello
-        <div>
-          <img src="/img/wave.gif" alt="Wave Icon" width="22px" />
-        </div>
-        ,<span class="text-primary">&nbsp;My name is</span>
-      </div>
-    </div>
-    <div
-      class="text-white font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight my-3 relative"
-    >
-      Ahmed Leewan.
-      <div
-        class="font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight absolute text-primary/20 top-1 left-1"
-      >
-        Ahmed Leewan.
-      </div>
-    </div>
-    <div class="relative md:w-3/4">
-      <p class="text-base text-white/70 font-normal max-w-3xl">
-        I'm a <span class="font-mono text-primary">full-stack</span> engineer with
-        a passion for backend development. Welcome to my little corner of the internet.
-        I'm glad you're here!
-      </p>
-      <div
-        class="bg-[url('/img/cricle-cross.svg')] bg-no-repeat w-36 h-11 absolute rotate-180 right-10 opacity-50 translate-y-full"
-      >
-      </div>
-    </div>
-    <div class="bg-[url('/img/wavy-line.svg')] bg-no-repeat w-full h-4 mt-6">
-    </div>
-  </section>
+  <HomeSection />
 </Layout>
