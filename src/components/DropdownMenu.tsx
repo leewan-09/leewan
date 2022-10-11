@@ -9,8 +9,7 @@ const DropdownMenu: React.FC = () => {
       <Menu>
         <Menu.Button
           className="hover:text-primary text-2xl pl-2 focus:outline-none outline-none"
-          aria-label="Menu"
-        >
+          aria-label="Menu">
           <BsThreeDotsVertical />
         </Menu.Button>
         <Transition
@@ -20,15 +19,9 @@ const DropdownMenu: React.FC = () => {
           enterTo="transform opacity-100 scale-100"
           leave="transition ease-in duration-75"
           leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-        >
+          leaveTo="transform opacity-0 scale-95">
           <Menu.Items className="absolute bg-zinc-700 right-6  w-40 origin-top-right rounded-md shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="p-2">
-              <Menu.Item>
-                <button className="hover:text-primary transition-colors text-left w-full text-sm p-1">
-                  Home
-                </button>
-              </Menu.Item>
               <Menu.Item>
                 <button className="hover:text-primary transition-colors text-left w-full text-sm p-1">
                   About me
