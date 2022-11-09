@@ -28,9 +28,11 @@ const DropdownMenu: React.FC = () => {
                 </button>
               </Menu.Item>
               <Menu.Item>
-                <button className="hover:text-primary transition-colors text-left w-full text-sm p-1">
+                <a
+                  href="https://leewan-09.showwcase.com/shows"
+                  className="hover:text-primary transition-colors text-left w-full text-sm p-1">
                   Showcase
-                </button>
+                </a>
               </Menu.Item>
             </div>
           </Menu.Items>
