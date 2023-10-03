@@ -1,0 +1,57 @@
+---
+import { BsTelegram, BsGithub, BsTwitter } from 'react-icons/bs';
+---
+
+<nav class="max-w-screen-xl w-full h-14 m-auto px-6">
+  <div class="flex h-full justify-between items-center">
+    <div
+      class="flex text-xl font-semibold tracking-wider group cursor-pointer font-mono">
+      <div class="flex flex-col">
+        <div class="group-hover:text-primary transition-all ease-in-out">
+          LEE
+        </div>
+        <div
+          class="h-[2px] bg-primary group-hover:bg-white transition-all ease-in-out">
+        </div>
+      </div>
+      <div class="flex flex-col">
+        <div
+          class="text-primary group-hover:text-white transition-all ease-in-out">
+          WAN
+        </div>
+        <div
+          class="h-[2px] bg-white group-hover:bg-primary transition-all ease-in-out">
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="flex">
+        <a
+          href="https://github.com/leewan-09"
+          target="_blank"
+          aria-label="Github"
+          class="pr-2">
+          <BsGithub className="hover:text-primary transition-colors text-2xl" />
+        </a>
+        <a
+          href="https://twitter.com/leewan98"
+          target="_blank"
+          aria-label="Twitter"
+          class="px-2">
+          <BsTwitter
+            className="hover:text-primary transition-colors text-2xl"
+          />
+        </a>
+        <a
+          href="https://t.me/toor09"
+          target="_blank"
+          aria-label="Linkedin"
+          class="md:px-2 pl-2">
+          <BsTelegram
+            className="hover:text-primary transition-colors text-2xl"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
