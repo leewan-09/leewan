@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans:
+    var(--font-inter-sans), ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --color-primary: #00c0d7;
+  --color-background: #242528;
+}
+
+body {
+  margin: 0;
+  background-color: hsla(225, 5%, 15%, 1);
+  background-color: linear-gradient(
+    90deg,
+    hsla(225, 5%, 15%, 1) 0%,
+    hsla(213, 10%, 17%, 1) 100%
+  );
+  color: white;
+}
