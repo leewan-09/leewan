@@ -1,0 +1,147 @@
+{
+  "projects": [
+    {
+      "id": "wellness-raagu",
+      "title": "Wellness Raagu",
+      "description": "Full-featured e-commerce platform for herbal wellness products with secure authentication, shopping cart, and integrated BML payment gateway for Maldivian market.",
+      "date": "2024-12-01",
+      "tags": ["Next.js", "TailwindCSS", "PostgreSQL", "BML Payment API"],
+      "github": null,
+      "demo": "https://wellnessraagu.com/",
+      "featured": true,
+      "order_number": 1
+    },
+    {
+      "id": "furaaqu-platform",
+      "title": "Furaaqu",
+      "description": "Comprehensive speed launch booking platform for Maldives with custom segment-based seat allocation algorithm preventing overbooking and supporting partial routes.",
+      "date": "2024-08-15",
+      "tags": ["Next.js", "PostgreSQL", "Prisma", "tRPC", "TailwindCSS"],
+      "github": null,
+      "demo": "https://furaaqu.com",
+      "featured": true,
+      "order_number": 2
+    },
+    {
+      "id": "youtu-bio-platform",
+      "title": "Youtu.Bio",
+      "description": "Custom bio link platform for YouTubers with customizable branding, embedded video previews, and real-time analytics via Docker microservices architecture.",
+      "date": "2024-06-20",
+      "tags": ["NuxtJS", "ExpressJS", "MongoDB", "Docker", "Plausible Analytics"],
+      "github": null,
+      "demo": null,
+      "featured": true,
+      "order_number": 3
+    },
+    {
+      "id": "salesco-ecommerce",
+      "title": "Salesco",
+      "description": "Full-stack e-commerce solution with comprehensive product management, cart functionality, secure checkout, and user authentication system.",
+      "date": "2024-07-10",
+      "tags": ["Next.js", "TailwindCSS", "PostgreSQL", "tRPC"],
+      "github": null,
+      "demo": "https://salesco.com.mv/",
+      "featured": false,
+      "order_number": 4
+    },
+    {
+      "id": "silversmoke-ecommerce",
+      "title": "Silversmoke",
+      "description": "Modern e-commerce website for vape shop with live inventory integration via Ewity POS API, ensuring real-time stock accuracy across online and physical store.",
+      "date": "2024-05-15",
+      "tags": ["Next.js", "TailwindCSS", "NestJS", "PostgreSQL", "Ewity POS API"],
+      "github": null,
+      "demo": "https://silversmoke.mv/",
+      "featured": false,
+      "order_number": 5
+    },
+    {
+      "id": "maahdhaa4-platform",
+      "title": "Maahdhaa4.com",
+      "description": "Public engagement platform for shaping Maldives' future, with solo-developed backend infrastructure focusing on security, scalability, and performance.",
+      "date": "2024-04-10",
+      "tags": ["NestJS", "PostgreSQL", "Prisma", "Docker", "GitHub Actions"],
+      "github": null,
+      "demo": "https://maahdhaa4.com/",
+      "featured": false,
+      "order_number": 6
+    },
+    {
+      "id": "silver-oasis-maldives",
+      "title": "Silver Oasis Maldives",
+      "description": "Modern responsive website for beachfront guest house featuring room galleries, rooftop dining showcase, and integrated booking inquiries system.",
+      "date": "2024-03-20",
+      "tags": ["Next.js", "TailwindCSS"],
+      "github": null,
+      "demo": "https://silveroasismaldives.com/",
+      "featured": false,
+      "order_number": 7
+    },
+    {
+      "id": "furaaqu-naalu",
+      "title": "Furaaqu Naalu",
+      "description": "Supply boat shipping cost management portal for calculating and managing transportation costs between Maldivian islands.",
+      "date": "2024-02-28",
+      "tags": ["Next.js", "TailwindCSS", "PostgreSQL", "tRPC", "Prisma"],
+      "github": null,
+      "demo": "https://naalu.furaaqu.com/",
+      "featured": false,
+      "order_number": 8
+    },
+    {
+      "id": "apex-logistics",
+      "title": "Apex Logistics",
+      "description": "Clean and informative company portfolio website showcasing logistics services and achievements with modern design approach.",
+      "date": "2024-01-15",
+      "tags": ["Next.js", "TailwindCSS"],
+      "github": null,
+      "demo": "https://apexlogistics.mv/",
+      "featured": false,
+      "order_number": 9
+    },
+    {
+      "id": "ninesixteen-website",
+      "title": "NineSixteen",
+      "description": "Official company landing page with modern layout, clear branding, SEO optimization, and fast load times reflecting company identity.",
+      "date": "2023-12-10",
+      "tags": ["Next.js", "TailwindCSS"],
+      "github": null,
+      "demo": "https://ninesixteen.mv/",
+      "featured": false,
+      "order_number": 10
+    },
+    {
+      "id": "ilm-vidhaaraa",
+      "title": "ILM Vidhaaraa",
+      "description": "Self-paced e-learning platform designed specifically for Maldivian learners to access and complete courses on their own schedule.",
+      "date": "2023-10-05",
+      "tags": ["Flutter", "PHP", "MySQL"],
+      "github": null,
+      "demo": null,
+      "featured": false,
+      "order_number": 11
+    },
+    {
+      "id": "dhivehi-calendar",
+      "title": "Dhivehi Calendar",
+      "description": "Mobile app for browsing Maldivian public holidays and important dates in local Dhivehi language with cultural relevance and simplicity.",
+      "date": "2023-08-20",
+      "tags": ["Flutter", "REST APIs"],
+      "github": null,
+      "demo": null,
+      "featured": false,
+      "order_number": 12
+    },
+    {
+      "id": "dhivehi-maps",
+      "title": "Dhivehi Maps",
+      "description": "Interactive world map application in Dhivehi language, specifically designed and targeted for Maldivian users with cultural context.",
+      "date": "2023-07-15",
+      "tags": ["Flutter", "MapBox SDK"],
+      "github": null,
+      "demo": null,
+      "featured": false,
+      "order_number": 13
+    }
+  ]
+}

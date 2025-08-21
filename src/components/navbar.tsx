@@ -56,28 +56,30 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <ul className="flex items-center gap-4" role="list">
-          {socialLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={link.label}
-                className="block opacity-70 transition-opacity hover:opacity-100 focus:opacity-100"
-              >
-                <Image
-                  src={link.icon}
-                  alt={link.alt}
-                  width={24}
-                  height={24}
-                  className="brightness-0 invert"
-                  priority
-                />
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div className="flex items-center gap-6">
+          <ul className="flex items-center gap-4" role="list">
+            {socialLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.label}
+                  className="block opacity-70 transition-opacity hover:opacity-100 focus:opacity-100"
+                >
+                  <Image
+                    src={link.icon}
+                    alt={link.alt}
+                    width={24}
+                    height={24}
+                    className="brightness-0 invert"
+                    priority
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </nav>
   );
