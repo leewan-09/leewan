@@ -3,6 +3,7 @@ import { EXTERNAL_LINKS, SITE_CONFIG } from "@/lib/constants";
 import { getAllProjects } from "@/lib/projects";
 import ProjectGrid from "@/components/project-grid";
 import Link from "next/link";
+import DownloadButton from "@/components/download-button";
 
 export default function HomePage() {
   const projects = getAllProjects();
@@ -29,6 +30,7 @@ export default function HomePage() {
               height={30}
               className="ml-1"
               priority
+              unoptimized
             />
             ,
             <span className="ml-1">
@@ -57,7 +59,24 @@ export default function HomePage() {
             <span className="text-primary font-mono">full-stack</span> engineer
             with a passion for{" "}
             <span className="text-primary font-mono">backend development</span>.
-            Check out my
+            Currently working as a{" "}
+            <span className="text-primary font-mono">
+              {SITE_CONFIG.currentRole}
+            </span>
+            {SITE_CONFIG.company && (
+              <>
+                {" "}
+                at{" "}
+                <span className="text-primary font-mono">
+                  {SITE_CONFIG.company}
+                </span>
+              </>
+            )}{" "}
+            with{" "}
+            <span className="text-primary font-mono">
+              {SITE_CONFIG.experience}
+            </span>{" "}
+            of experience. Check out my
             <Link
               href="/#projects"
               className="text-primary font-mono hover:underline focus:underline"
@@ -77,6 +96,13 @@ export default function HomePage() {
             </a>{" "}
             me.
           </p>
+
+          <div className="mt-6 sm:hidden">
+            <DownloadButton href={SITE_CONFIG.cvLink}>
+              Download CV
+            </DownloadButton>
+          </div>
+
           <div
             className="absolute right-10 h-11 w-36 translate-y-full rotate-180 bg-[url('/images/cricle-cross.svg')] bg-no-repeat opacity-50"
             role="presentation"

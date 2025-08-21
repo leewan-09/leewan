@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { EXTERNAL_LINKS, SITE_CONFIG } from "@/lib/constants";
+import DownloadButton from "@/components/download-button";
 
 interface SocialLink {
   href: string;
@@ -57,6 +58,13 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center gap-6">
+          <DownloadButton
+            href={SITE_CONFIG.cvLink}
+            className="hidden sm:inline-flex"
+          >
+            Download CV
+          </DownloadButton>
+
           <ul className="flex items-center gap-4" role="list">
             {socialLinks.map((link) => (
               <li key={link.href}>

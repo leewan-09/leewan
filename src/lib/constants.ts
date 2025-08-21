@@ -9,4 +9,9 @@ export const SITE_CONFIG = {
   name: "Leewan",
   title: "Full-stack Developer",
   description: "Full-stack engineer with a passion for backend development.",
+  currentRole: "Full-Stack Developer",
+  company: "Nine Sixteen Investment Pvt. Ltd", // Add your company name here
+  experience: "5+ years", // Update with your actual experience
+  cvLink:
+    "https://drive.google.com/drive/folders/1obdkkB3U2eztMoiUAIwrEaTkGgwxpnyu?usp=sharing",
 } as const;
