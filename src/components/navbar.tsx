@@ -13,19 +13,19 @@ const socialLinks: SocialLink[] = [
   {
     href: EXTERNAL_LINKS.github,
     label: "GitHub",
-    icon: "/img/github.svg",
+    icon: "/images/github.svg",
     alt: "GitHub",
   },
   {
     href: EXTERNAL_LINKS.twitter,
     label: "X (Twitter)",
-    icon: "/img/x.svg",
+    icon: "/images/x.svg",
     alt: "X",
   },
   {
     href: EXTERNAL_LINKS.telegram,
     label: "Telegram",
-    icon: "/img/tg.svg",
+    icon: "/images/tg.svg",
     alt: "Telegram",
   },
 ];
