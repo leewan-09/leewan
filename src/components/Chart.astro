@@ -61,7 +61,7 @@ const ticks = [7, 6, 5, 4, 3, 2, 1, 0].map((lat) => ({
   </div>
 </div>
 
-<div class="equator" aria-hidden="true"></div>
+<div id="equator" class="equator" aria-hidden="true"></div>
 <span class="equator-label" aria-hidden="true">
   The equator
 </span>
@@ -247,6 +247,8 @@ const ticks = [7, 6, 5, 4, 3, 2, 1, 0].map((lat) => ({
   }
 
   .equator {
+    /* Lands the line in the upper part of the screen, with Contact right below it. */
+    scroll-margin-top: 35vh;
     top: 3074.5px;
     left: 50%;
     width: 100vw;
