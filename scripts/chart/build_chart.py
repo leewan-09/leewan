@@ -154,22 +154,6 @@ s = svg(render(X, Y, S, W, H), W, H)
 open(out + "/chart.svg", "w").write(s)
 print("chart.svg KB", len(s) // 1024)
 
-AW, AH = 342, 148
-crops = {
-    "noonu": (5.78, 73.38, 560),
-    "kaafu": (4.33, 73.56, 520),
-    "laamu": (1.95, 73.40, 560),
-    "ari": (3.86, 72.90, 470),
-    "raa": (5.5, 72.98, 520),
-    "addu": (-0.63, 73.13, 820),
-}
-for n, (la, lo, z) in crops.items():
-    l0 = lo - (AW / 2) / z
-    t0 = la + (AH / 2) / z
-    xf = lambda a, l0=l0, z=z: (a - l0) * z
-    yf = lambda b, t0=t0, z=z: (t0 - b) * z
-    open(f"{out}/atoll-{n}.svg", "w").write(svg(render(xf, yf, z, AW, AH, minreef=1.5, hazeR=10, m=24), AW, AH))
-
 # Scrollbar art
 ms = 150 / (LAT0 + 0.78)
 ml = 72.58
@@ -202,6 +186,176 @@ for n, la, lo, side in AT:
     ys = [Y(i["lat"]) for i in cl[n]]
     labels.append({"name": n, "x": round((max(xs) + 10) if side == "E" else (min(xs) - 10), 1),
                    "y": round(sum(ys) / len(ys) - 8, 1), "side": side})
+
+# Project cards: each chart is drawn at the scale the project works at.
+# Warm light means "this project". Every other island stays dim.
+CW, CH = 640, 184
+MALE = (4.178, 73.5107)
+# Stops in sailing order, from the operators' own timetables.
+FURAAQU = [
+    MALE, (5.4916, 73.4118), (5.7665, 73.4127), (5.7762, 73.3625), (5.7905, 73.3629), (5.816, 73.3779),
+    (5.8828, 73.4), (5.9513, 73.4165), (5.9678, 73.393), (6.0359, 73.2835), (6.15, 73.2905),
+    (6.1641, 73.2521), (6.2643, 73.2181), (6.2862, 73.2434), (6.3272, 73.1489),
+]
+YOOSUF = [MALE, (4.1917, 73.529), (5.1031, 73.071), (5.1345, 73.1076), (5.2757, 73.0099), (5.3002, 73.0703)]
+
+
+def num(v):
+    s = f"{v:.1f}".rstrip("0").rstrip(".")
+    return "0" if s in ("", "-0") else s
+
+
+def dots(pts):
+    """Draw points as tiny round-capped strokes, which is far smaller than circles."""
+    return "".join(f"M{num(x)} {num(y)}h.01" for x, y in pts)
+
+
+class CardChart:
+    def __init__(self, la, lo, z):
+        self.x = lambda a: CW / 2 + (a - lo) * z
+        self.y = lambda b: CH / 2 + (la - b) * z
+        self.parts = []
+        self.marks = []
+
+    def xy(self, p):
+        return self.x(p[1]), self.y(p[0])
+
+    def seen(self, x, y, m=20):
+        return -m <= x <= CW + m and -m <= y <= CH + m
+
+    def sea(self, cell=8, reach=10, minreef=1.2, islands=True):
+        hz = set()
+        rf = []
+        for r in d["reefs"]:
+            raw = [(self.x(a), self.y(b)) for a, b in r]
+            if not any(self.seen(*p) for p in raw):
+                continue
+            hz.update((int(p[0] / cell), int(p[1] / cell)) for p in raw if self.seen(*p))
+            pts = dp(raw, 0.6)
+            if len(pts) > 1 and max(abs(p[0] - pts[0][0]) + abs(p[1] - pts[0][1]) for p in pts) >= minreef:
+                rf.append(lp(pts))
+        dim = [(self.x(i["lon"]), self.y(i["lat"])) for i in land]
+        dim = [p for p in dim if self.seen(*p)]
+        hz.update((int(x / cell), int(y / cell)) for x, y in dim)
+        centres = [((a + 0.5) * cell, (b + 0.5) * cell) for a, b in sorted(hz)]
+        self.parts.append(
+            f'<path fill="none" stroke="#2E7CA8" stroke-opacity=".2" stroke-width="{reach * 2}" '
+            f'stroke-linecap="round" filter="url(#a)" d="{dots(centres)}"/>'
+        )
+        if rf:
+            self.parts.append(
+                f'<path fill="none" stroke="#6C9DBA" stroke-opacity=".34" stroke-width=".5" d="{"".join(rf)}"/>'
+            )
+        if islands and dim:
+            self.parts.append(
+                f'<path fill="none" stroke="#9DBFD4" stroke-opacity=".6" stroke-width="1.1" '
+                f'stroke-linecap="round" d="{dots(dim)}"/>'
+            )
+        return self
+
+    def route(self, stops, opacity=0.8):
+        self.parts.append(
+            f'<path fill="none" stroke="#FFC98A" stroke-opacity="{opacity}" stroke-dasharray="3 3" '
+            f'd="{lp([self.xy(p) for p in stops])}"/>'
+        )
+        return self
+
+    def lights(self, points, core=2.6, bloom=3.6):
+        pts = dots(self.xy(p) for p in points)
+        self.parts.append(
+            f'<path fill="none" stroke="#FFC98A" stroke-opacity=".5" stroke-width="{bloom * 2}" '
+            f'stroke-linecap="round" filter="url(#c)" d="{pts}"/>'
+            f'<path fill="none" stroke="#FFF3E2" stroke-width="{core}" stroke-linecap="round" d="{pts}"/>'
+        )
+        return self
+
+    def hub(self, p):
+        x, y = self.xy(p)
+        self.parts.append(
+            f'<circle cx="{x:.1f}" cy="{y:.1f}" r="14" fill="#FFB869" fill-opacity=".22" filter="url(#b)"/>'
+            f'<circle cx="{x:.1f}" cy="{y:.1f}" r="7" fill="#FFC98A" fill-opacity=".5" filter="url(#c)"/>'
+            f'<circle cx="{x:.1f}" cy="{y:.1f}" r="2.6" fill="#FFF"/>'
+        )
+        return self
+
+    def mark(self, text, p, side="E", gap=8):
+        x, y = self.xy(p)
+        ox, oy = {"E": (gap, 0), "W": (-gap, 0), "S": (0, gap)}[side]
+        self.marks.append({"text": text, "x": round(x + ox - CW / 2, 1), "y": round(y + oy, 1), "side": side})
+        return self
+
+    def write(self, name):
+        f = lambda i, s: (
+            f'<filter id="{i}" filterUnits="userSpaceOnUse" x="-60" y="-60" width="{CW + 120}" height="{CH + 120}" '
+            f'color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="{s}"/></filter>'
+        )
+        open(f"{out}/card-{name}.svg", "w").write(
+            f'<svg xmlns="http://www.w3.org/2000/svg" width="{CW}" height="{CH}" viewBox="0 0 {CW} {CH}"><defs>'
+            + f("a", 13) + f("b", 9) + f("c", 3) + "</defs>" + "".join(self.parts) + "</svg>"
+        )
+        return self.marks
+
+
+route_z = (CH - 44) / (FURAAQU[-1][0] - MALE[0])
+whole_z = (CH - 16) / (7.11 + 0.72)
+whole_la = (7.11 - 0.72) / 2
+whole_lo = MALE[1] + 18 / whole_z  # Sits left of centre to leave room for its label.
+cards = {}
+
+# Furaaqu and Yoosuf Speed: each company's real line of stops.
+cards["furaaqu"] = (
+    CardChart(5.25, 73.36, route_z).sea().route(FURAAQU).lights(FURAAQU[1:]).hub(MALE)
+    .mark("Malé", MALE).mark("Shaviyani", FURAAQU[-1], "W").write("furaaqu")
+)
+cards["yoosuf"] = (
+    CardChart(4.74, 73.3, (CH - 44) / (YOOSUF[-1][0] - MALE[0])).sea().route(YOOSUF)
+    .lights(YOOSUF[2:], core=3.2, bloom=4.4).hub(MALE)
+    .mark("Malé", MALE).mark("Baa", YOOSUF[4], "W").write("yoosuf")
+)
+
+# The PDF service renders the tickets for both of those lines.
+cards["pdf"] = (
+    CardChart(5.25, 73.28, route_z).sea().route(FURAAQU, 0.65).route(YOOSUF, 0.65)
+    .lights(FURAAQU[1:] + YOOSUF[2:]).hub(MALE)
+    .mark("Malé", MALE).mark("Furaaqu", FURAAQU[5], "E", 14).mark("Yoosuf Speed", YOOSUF[4], "W").write("pdf")
+)
+
+# Barfume is one city, so its chart is one city: every light is a mapped building.
+city = CardChart(4.196, 73.561, 1900).sea(cell=16, reach=18, minreef=2, islands=False)
+rings = [
+    lp(dp(ring, 0.35)) + "z"
+    for ring in ([(city.x(a), city.y(b)) for a, b in i["ring"]] for i in land)
+    if any(city.seen(*p) for p in ring)
+]
+built = sorted({(round(city.x(a) * 2) / 2, round(city.y(b) * 2) / 2) for a, b in d["buildings"]
+                if city.seen(city.x(a), city.y(b), 4)})
+city.parts.append(
+    f'<path fill="#9DBFD4" fill-opacity=".07" stroke="#9DBFD4" stroke-opacity=".35" stroke-width=".5" d="{"".join(rings)}"/>'
+    f'<path fill="none" stroke="#FFC98A" stroke-opacity=".3" stroke-width="5" stroke-linecap="round" '
+    f'filter="url(#c)" d="{dots(built)}"/>'
+    f'<path fill="none" stroke="#FFF3E2" stroke-opacity=".92" stroke-width=".95" stroke-linecap="round" d="{dots(built)}"/>'
+)
+east = max(city.x(a) for a, b in d["buildings"] if 4.2 < b < 4.23 and 73.52 < a < 73.57)
+hulhumale = ((CH / 2 - 44) / 1900 + 4.196, (east - CW / 2) / 1900 + 73.561)
+cards["barfume"] = (
+    city.mark("Malé", (4.1755, 73.5095), "S", 16).mark("Hulhumalé", hulhumale, "E", 10).write("barfume")
+)
+
+# TaxFlow: businesses in every atoll file with one tax authority in Malé.
+capitals = {n: max(cl[n], key=lambda i: i["b"]) for n, *_ in AT}
+capitals = [(i["lat"], i["lon"]) for n, i in capitals.items() if n != "Kaafu"]
+tax = CardChart(whole_la, whole_lo, whole_z).sea(cell=6, reach=6, minreef=9)
+fan = "".join(lp([tax.xy(p), tax.xy(MALE)]) for p in capitals)
+tax.parts.append(f'<path fill="none" stroke="#FFC98A" stroke-opacity=".5" stroke-width=".6" d="{fan}"/>')
+cards["taxflow"] = tax.lights(capitals, core=1.9, bloom=2.4).hub(MALE).mark("Tax authority, Malé", MALE, "E", 18).write("taxflow")
+
+# Basvaaru: a phone app, so every settled island is lit.
+settled = [(i["lat"], i["lon"]) for i in T1 + T2 + T3]
+cards["basvaaru"] = (
+    CardChart(whole_la, whole_lo, whole_z).sea(cell=6, reach=6, minreef=9).lights(settled, core=1.5, bloom=2.6)
+    .mark("On any island", MALE, "E", 26).write("basvaaru")
+)
+json.dump({"width": CW, "height": CH, "marks": cards}, open(out + "/cards.json", "w"), ensure_ascii=False, indent=1)
 
 # Island names for the hover label: English names only, one entry per place.
 seen = {}

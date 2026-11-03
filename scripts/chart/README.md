@@ -11,3 +11,5 @@ python3 -I scripts/chart/build_chart.py scripts/chart/.data/parsed.json src/asse
 ```
 
 The scripts use only the Python standard library.
+
+`build_chart.py` also draws one chart for each project card. Each must show something true about where that project works, so check the stop lists in the script against the operators' timetables when a route changes.

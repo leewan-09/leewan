@@ -1,0 +1,84 @@
+{
+ "width": 640,
+ "height": 184,
+ "marks": {
+  "furaaqu": [
+   {
+    "text": "Malé",
+    "x": 17.8,
+    "y": 161.8,
+    "side": "E"
+   },
+   {
+    "text": "Shaviyani",
+    "x": -21.8,
+    "y": 21.8,
+    "side": "W"
+   }
+  ],
+  "yoosuf": [
+   {
+    "text": "Malé",
+    "x": 34.3,
+    "y": 162.1,
+    "side": "E"
+   },
+   {
+    "text": "Baa",
+    "x": -44.2,
+    "y": 25.2,
+    "side": "W"
+   }
+  ],
+  "pdf": [
+   {
+    "text": "Malé",
+    "x": 23.0,
+    "y": 161.8,
+    "side": "E"
+   },
+   {
+    "text": "Furaaqu",
+    "x": 20.4,
+    "y": 55.1,
+    "side": "E"
+   },
+   {
+    "text": "Yoosuf Speed",
+    "x": -25.6,
+    "y": 90.3,
+    "side": "W"
+   }
+  ],
+  "barfume": [
+   {
+    "text": "Malé",
+    "x": -97.9,
+    "y": 146.9,
+    "side": "S"
+   },
+   {
+    "text": "Hulhumalé",
+    "x": -12.8,
+    "y": 44.0,
+    "side": "E"
+   }
+  ],
+  "taxflow": [
+   {
+    "text": "Tax authority, Malé",
+    "x": 0.0,
+    "y": 70.9,
+    "side": "E"
+   }
+  ],
+  "basvaaru": [
+   {
+    "text": "On any island",
+    "x": 8.0,
+    "y": 70.9,
+    "side": "E"
+   }
+  ]
+ }
+}

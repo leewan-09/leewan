@@ -1,9 +1,9 @@
-import addu from "@/assets/chart/atoll-addu.svg?url";
-import ari from "@/assets/chart/atoll-ari.svg?url";
-import kaafu from "@/assets/chart/atoll-kaafu.svg?url";
-import laamu from "@/assets/chart/atoll-laamu.svg?url";
-import noonu from "@/assets/chart/atoll-noonu.svg?url";
-import raa from "@/assets/chart/atoll-raa.svg?url";
+import barfume from "@/assets/chart/card-barfume.svg?url";
+import basvaaru from "@/assets/chart/card-basvaaru.svg?url";
+import furaaqu from "@/assets/chart/card-furaaqu.svg?url";
+import pdf from "@/assets/chart/card-pdf.svg?url";
+import taxflow from "@/assets/chart/card-taxflow.svg?url";
+import yoosuf from "@/assets/chart/card-yoosuf.svg?url";
 
 export const SITE = {
   name: "Leewan",
@@ -27,48 +27,72 @@ export const LINKS = {
 export interface Project {
   name: string;
   summary: string;
-  /** Decorative atoll crop. It doesn't show where the project is. */
+  /** Key of this card's chart and labels in cards.json. */
+  chart: "furaaqu" | "barfume" | "yoosuf" | "taxflow" | "basvaaru" | "pdf";
+  /** A real chart of where the project works. */
   art: string;
+  artAlt: string;
   href?: string;
+  /** Where the card's link goes, as shown on the card. */
+  destination?: string;
 }
 
 /** Each card opens something a visitor can actually see. Other work goes in ALSO_BUILT. */
 export const PROJECTS: Project[] = [
   {
     name: "Furaaqu",
-    summary: "Speedboat ticketing for daily routes",
-    art: noonu,
+    summary: "Booking for a speedboat line up north",
+    chart: "furaaqu",
+    art: furaaqu,
+    artAlt: "Chart of Furaaqu's line of 15 stops, from Malé north to Shaviyani",
     href: "https://furaaqu.com",
+    destination: "furaaqu.com",
   },
   {
     name: "Barfume",
-    summary: "Fragrance store and catalogue",
-    art: kaafu,
+    summary: "Fragrance store in Malé",
+    chart: "barfume",
+    art: barfume,
+    artAlt: "Chart of Malé and Hulhumalé, with every mapped building lit",
     href: "https://barfumemv.com",
+    destination: "barfumemv.com",
   },
   {
     name: "Yoosuf Speed",
-    summary: "Speedboat booking platform",
-    art: raa,
+    summary: "Booking for a speedboat line to Baa",
+    chart: "yoosuf",
+    art: yoosuf,
+    artAlt: "Chart of Yoosuf Speed's line from Malé to four islands in Baa",
     href: "https://yoosufspeed.com",
+    destination: "yoosufspeed.com",
   },
   {
     name: "TaxFlow",
     summary: "Invoice photos into tax statements",
-    art: ari,
+    chart: "taxflow",
+    art: taxflow,
+    artAlt: "Chart of the whole country, with a line from every atoll to Malé",
     href: "https://taxflow.run",
+    destination: "taxflow.run",
   },
   {
     name: "Basvaaru",
     summary: "Platform behind a Dhivehi learning app",
-    art: laamu,
+    chart: "basvaaru",
+    art: basvaaru,
+    artAlt: "Chart of the whole country, with its settled islands lit",
     href: "https://play.google.com/store/apps/details?id=com.thestudypoint.basvaaru",
+    destination: "Google Play",
   },
   {
     name: "PDF service",
-    summary: "Rust HTML-to-PDF service",
-    art: addu,
+    summary: "100,000+ tickets, invoices and résumés",
+    chart: "pdf",
+    art: pdf,
+    artAlt:
+      "Chart of the Furaaqu and Yoosuf Speed lines, both leaving from Malé",
     href: "https://github.com/leewan-09/html-to-pdf",
+    destination: "GitHub",
   },
 ];
 

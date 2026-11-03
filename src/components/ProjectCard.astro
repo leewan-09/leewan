@@ -1,53 +1,78 @@
 ---
+import cards from "@/assets/chart/cards.json";
 import type { Project } from "@/lib/content";
 
 type Props = Project;
 
-const { name, summary, art, href } = Astro.props;
+const { name, summary, chart, art, artAlt, href, destination } = Astro.props;
 const Tag = href ? "a" : "div";
+const marks = cards.marks[chart];
 ---
 
 <Tag
-  class="card group relative block overflow-hidden rounded-[20px] border border-line bg-raised transition-colors"
+  class="card group relative block h-full overflow-hidden rounded-[20px] border border-line bg-raised transition-colors"
   {...(href ? { href, target: "_blank", rel: "noopener" } : {})}
 >
-  <img
-    class="card__art h-[148px] w-full object-cover"
-    src={art}
-    alt=""
-    width="342"
-    height="148"
-    loading="lazy"
-    decoding="async"
-  />
-  <div class="card__fade" aria-hidden="true"></div>
-  {href && (
-    <svg
-      class="absolute top-3 right-3 text-line-strong transition-colors group-hover:text-white group-focus-visible:text-white"
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M5 11 11 5M6 5h5v5"
-        stroke="currentColor"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-    </svg>
-  )}
-  <div class="relative flex flex-col gap-1 px-5 pt-4 pb-5">
+  <div class="card__chart relative overflow-hidden">
+    <img
+      class="card__art"
+      src={art}
+      alt={artAlt}
+      width={cards.width}
+      height={cards.height}
+      loading="lazy"
+      decoding="async"
+    />
+    <div class="card__fade" aria-hidden="true"></div>
+    {marks.map((m) => (
+      <span
+        class:list={["card__mark", `card__mark--${m.side}`]}
+        style={{ "--x": m.x, "--y": m.y }}
+        aria-hidden="true"
+      >
+        {m.text}
+      </span>
+    ))}
+    {href && (
+      <span class="card__dest absolute top-3 right-3.5 flex items-center gap-1 text-xs/4 text-ink-3 transition-colors group-hover:text-ink group-focus-visible:text-ink">
+        {destination}
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 16 16"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M5 11 11 5M6 5h5v5"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </span>
+    )}
+  </div>
+  <div class="relative flex flex-col gap-1 px-5 pt-3 pb-5">
     <h3 class="font-display text-title text-ink">{name}</h3>
-    <p class="text-sm/5 text-ink-2">{summary}</p>
+    <p class="text-sm/5 text-balance text-ink-2">{summary}</p>
   </div>
 </Tag>
 
 <style>
+  .card__chart {
+    height: 184px;
+  }
+
+  /* Shown at its real size, so the map's scale and labels don't change with the card's width. */
   .card__art {
-    opacity: 0.85;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    max-width: none;
+    translate: -50% 0;
+    opacity: 0.9;
     transition: opacity 0.2s;
   }
 
@@ -58,10 +83,40 @@ const Tag = href ? "a" : "div";
 
   .card__fade {
     position: absolute;
-    inset: 94px 0 auto;
-    height: 56px;
+    inset: auto 0 0;
+    height: 36px;
     background: linear-gradient(transparent, var(--color-raised));
     pointer-events: none;
+  }
+
+  /* A soft halo keeps small text readable where it crosses the chart's islands. */
+  .card__mark,
+  .card__dest {
+    text-shadow:
+      0 0 2px var(--color-raised),
+      0 0 6px var(--color-raised);
+  }
+
+  .card__mark {
+    position: absolute;
+    top: calc(var(--y) * 1px);
+    left: calc(50% + var(--x) * 1px);
+    color: var(--color-ink-2);
+    font-size: 12px;
+    line-height: 16px;
+    white-space: nowrap;
+  }
+
+  .card__mark--E {
+    translate: 0 -50%;
+  }
+
+  .card__mark--W {
+    translate: -100% -50%;
+  }
+
+  .card__mark--S {
+    translate: -50% 0;
   }
 
   a.card:hover {
