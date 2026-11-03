@@ -1,0 +1,71 @@
+---
+import miniUrl from "@/assets/chart/mini.svg?url";
+---
+
+<!--
+  A pointer shortcut only, so it's hidden from assistive tech. Keyboard and
+  screen reader users have normal scrolling and the nav links.
+-->
+<div class="chain" data-chain aria-hidden="true">
+  <span class="chain__readout" data-chain-readout></span>
+  <div class="chain__track">
+    <img src={miniUrl} alt="" width="23.8" height="150" decoding="async" />
+    <div class="chain__marker" data-chain-marker></div>
+  </div>
+</div>
+
+<style>
+  /* Stays hidden until the script runs, so it never shows a stale position. */
+  .chain {
+    position: fixed;
+    top: 50%;
+    right: 8px;
+    z-index: 10;
+    display: none;
+    align-items: flex-start;
+    gap: 8px;
+    translate: 0 -50%;
+  }
+
+  @media (min-width: 80rem) {
+    :global(html[data-chain-ready]) .chain {
+      display: flex;
+    }
+  }
+
+  .chain__readout {
+    margin-top: 8px;
+    padding-inline: 4px;
+    /* Latitude ticks scroll past underneath, so it needs a solid backing. */
+    background: var(--color-base);
+    color: var(--color-ink-3);
+    font-size: 12px;
+    line-height: 16px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .chain__track {
+    position: relative;
+    width: 36px;
+    height: 150px;
+    cursor: pointer;
+  }
+
+  .chain__track img {
+    position: absolute;
+    left: 6px;
+    width: 23.8px;
+    height: 150px;
+    max-width: none;
+  }
+
+  .chain__marker {
+    position: absolute;
+    inset: 0 0 auto;
+    border: 1px solid var(--color-line-strong);
+    border-radius: 6px;
+    background: rgb(255 255 255 / 0.08);
+    will-change: transform;
+  }
+</style>

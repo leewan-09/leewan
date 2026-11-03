@@ -1,0 +1,218 @@
+---
+import Button from "@/components/Button.astro";
+import ChainScrollbar from "@/components/ChainScrollbar.astro";
+import Chart from "@/components/Chart.astro";
+import ChartWindow from "@/components/ChartWindow.astro";
+import Nav from "@/components/Nav.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import Base from "@/layouts/Base.astro";
+import meta from "@/assets/chart/meta.json";
+import {
+  ALSO_BUILT,
+  LINKS,
+  PRINCIPLES,
+  PROJECTS,
+  SITE,
+  TOOLS,
+} from "@/lib/content";
+
+const label = (name: string) => meta.labels.find((l) => l.name === name)!;
+const mark = (name: string) => ({
+  text: name,
+  x: label(name).x,
+  y: label(name).y,
+});
+---
+
+<Base>
+  <a
+    href="#main"
+    class="sr-only z-30 rounded-full bg-white px-5 py-3 text-sm font-medium text-black focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
+  >
+    Skip to content
+  </a>
+  <Nav />
+
+  <div class="relative mx-auto max-w-[1440px]" id="top">
+    <Chart />
+
+    <main
+      id="main"
+      class="relative px-(--margin) xl:w-[calc(100%-644px)] xl:max-w-[calc(var(--margin)+608px)] xl:pr-0"
+    >
+      <div class="xl:min-h-[3144px]">
+        <section class="relative pt-28 xl:min-h-[900px] xl:pt-[216px]">
+          <h1 class="font-display text-hero text-ink">
+            I build software for a country of 1,192 islands.
+          </h1>
+          <p class="mt-6 max-w-[520px] text-lead text-ink-2 xl:mt-8">
+            I’m Leewan, a full-stack engineer in the Maldives. More than five
+            years of building for the web and mobile, backend first.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3 xl:mt-8">
+            <Button href="#work">View work</Button>
+            <Button href="#contact" kind="ghost">
+              Get in touch
+            </Button>
+          </div>
+          <a
+            href="#work"
+            class="scroll-cue absolute hidden items-center gap-2 text-sm/5 text-ink-3 transition-colors hover:text-ink xl:inline-flex"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M8 3v10M4 9l4 4 4-4"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </svg>
+            Scroll south
+          </a>
+        </section>
+
+        <ChartWindow
+          from={20}
+          to={536}
+          marks={[mark("Haa Alif"), mark("Haa Dhaalu"), mark("Shaviyani")]}
+        />
+
+        <section id="work" class="scroll-mt-24 pt-8 xl:pt-0">
+          <h2 class="font-display text-section text-ink">Selected work</h2>
+          <ul class="mt-6 grid gap-4 sm:grid-cols-2 sm:gap-6 xl:mt-8">
+            {PROJECTS.map((project) => (
+              <li>
+                <ProjectCard {...project} />
+              </li>
+            ))}
+          </ul>
+          <p class="mt-6 text-sm/5 text-ink-3">{ALSO_BUILT}</p>
+        </section>
+
+        <ChartWindow
+          from={1010}
+          to={1494}
+          marks={[
+            mark("Kaafu"),
+            {
+              text: "Malé",
+              x: meta.male[0]! + 20,
+              y: meta.male[1]! - 10,
+              strong: true,
+            },
+          ]}
+        />
+
+        <section id="about" class="scroll-mt-24 pt-4 xl:mt-[200px] xl:pt-0">
+          <h2 class="sr-only">About</h2>
+          <p class="font-display text-statement text-ink">
+            I like the part of software nobody sees: data models, reliability,
+            and systems that keep working long after launch.
+          </p>
+          <div class="mt-8 grid gap-4 sm:grid-cols-3 sm:gap-6 xl:mt-12">
+            {PRINCIPLES.map((p) => (
+              <div>
+                <h3 class="text-sm/5 font-medium text-ink">{p.title}</h3>
+                <p class="mt-1 text-sm/5 text-ink-2">{p.line}</p>
+              </div>
+            ))}
+          </div>
+          <dl class="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-6 xl:mt-12">
+            {TOOLS.map((t) => (
+              <div>
+                <dt class="text-sm/5 font-medium text-ink">{t.title}</dt>
+                <dd class="mt-1 text-sm/5 text-ink-2">{t.list}</dd>
+              </div>
+            ))}
+          </dl>
+          <p class="mt-8 text-sm/5 text-ink-3 xl:mt-12">
+            Currently a full-stack developer at {SITE.employer}.
+          </p>
+        </section>
+      </div>
+
+      <ChartWindow
+        from={2840}
+        to={3453}
+        equator
+        marks={[
+          mark("Gnaviyani"),
+          {
+            text: "Addu",
+            x: meta.addu[0]! + 22,
+            y: meta.addu[1]! - 10,
+            strong: true,
+          },
+        ]}
+      />
+
+      <section id="contact" class="scroll-mt-24 pt-4 xl:pt-0">
+        <h2 class="font-display text-hero text-ink">Let’s build something.</h2>
+        <p class="mt-6 text-lead text-ink-2">
+          The fastest way to reach me is Telegram.
+        </p>
+        <div class="mt-6 flex flex-col items-start gap-3 sm:flex-row">
+          <Button href={LINKS.telegram}>Message me on Telegram</Button>
+          <Button href={LINKS.cv} kind="ghost">
+            Download CV
+          </Button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="relative flex flex-col gap-2 px-(--margin) pt-16 pb-10 text-sm/5 text-ink-3 sm:flex-row sm:items-center sm:justify-between xl:pt-[124px]">
+      <p>© 2026 {SITE.name}</p>
+      <p>
+        Island data ©
+        <a
+          class="underline-offset-2 transition-colors hover:text-ink hover:underline"
+          href={LINKS.osm}
+          target="_blank"
+          rel="noopener"
+        >
+          OpenStreetMap contributors
+        </a>
+      </p>
+      <div class="flex gap-6 text-ink-2">
+        <a
+          class="transition-colors hover:text-ink"
+          href={LINKS.github}
+          target="_blank"
+          rel="noopener"
+        >
+          GitHub
+        </a>
+        <a
+          class="transition-colors hover:text-ink"
+          href={LINKS.x}
+          target="_blank"
+          rel="noopener"
+        >
+          X
+        </a>
+      </div>
+    </footer>
+  </div>
+
+  <ChainScrollbar />
+</Base>
+
+<style>
+  .scroll-cue {
+    top: min(836px, calc(100svh - 64px));
+    left: 0;
+  }
+
+  @media (max-height: 760px) {
+    .scroll-cue {
+      display: none;
+    }
+  }
+</style>

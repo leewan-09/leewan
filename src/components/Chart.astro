@@ -1,0 +1,266 @@
+---
+import chartUrl from "@/assets/chart/chart.svg?url";
+import meta from "@/assets/chart/meta.json";
+
+const y = (lat: number) => (meta.lat0 - lat) * meta.scale;
+const ticks = [7, 6, 5, 4, 3, 2, 1, 0].map((lat) => ({
+  y: y(lat),
+  label: lat === 0 ? "0°" : `${lat}°N`,
+}));
+---
+
+<!-- Desktop only. On smaller screens ChartWindow shows parts of the same image. -->
+<div class="chart" data-chart>
+  <img
+    class="chart__img"
+    src={chartUrl}
+    width={meta.width}
+    height={meta.height}
+    decoding="async"
+    fetchpriority="high"
+    alt="Chart of the Maldives, with every island drawn as a point of light."
+  />
+  <div class="chart__marks" aria-hidden="true">
+    {meta.labels.map((l) => (
+      <span
+        class:list={["chart__label", { "chart__label--west": l.side === "W" }]}
+        style={{ left: `${l.x}px`, top: `${l.y}px` }}
+      >
+        {l.name}
+      </span>
+    ))}
+    <span
+      class="chart__place"
+      style={{
+        left: `${meta.male[0]! + 20}px`,
+        top: `${meta.male[1]! - 10}px`,
+      }}
+    >
+      Malé
+    </span>
+    <span
+      class="chart__place"
+      style={{
+        left: `${meta.addu[0]! + 22}px`,
+        top: `${meta.addu[1]! - 10}px`,
+      }}
+    >
+      Addu
+    </span>
+    {ticks.map((t) => (
+      <span class="chart__tick" style={{ top: `${t.y}px` }}>
+        {t.label}
+      </span>
+    ))}
+    <div class="chart__light" data-chart-light></div>
+    <div class="chart__ring" data-chart-ring></div>
+    <div class="chart__tip" data-chart-tip>
+      <strong data-chart-tip-name></strong>
+      <span data-chart-tip-coords></span>
+    </div>
+  </div>
+</div>
+
+<div class="equator" aria-hidden="true"></div>
+<span class="equator-label" aria-hidden="true">
+  The equator
+</span>
+
+<script>
+  import "@/scripts/chart";
+</script>
+
+<style>
+  .chart,
+  .equator,
+  .equator-label {
+    display: none;
+    position: absolute;
+  }
+
+  @media (min-width: 80rem) {
+    .chart,
+    .equator,
+    .equator-label {
+      display: block;
+    }
+  }
+
+  .chart {
+    top: 0;
+    right: 64px;
+    width: 610px;
+    height: 3409px;
+  }
+
+  .chart__img {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+  }
+
+  /*
+    The islands light up once, north to south, across the visible height.
+    Only --reveal animates: a var() inside a keyframe's mask-image would freeze
+    at that keyframe's value. The second animation then drops the mask entirely.
+  */
+  @property --reveal {
+    syntax: "<length>";
+    inherits: false;
+    initial-value: 100000px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .chart__img,
+    .chart__marks {
+      mask-image: linear-gradient(
+        #000 var(--reveal),
+        transparent calc(var(--reveal) + 240px)
+      );
+      animation:
+        light-up 1.8s cubic-bezier(0.3, 0.1, 0.3, 1) backwards,
+        drop-mask 0s linear 1.8s forwards;
+    }
+  }
+
+  @keyframes light-up {
+    from {
+      --reveal: -240px;
+    }
+    to {
+      --reveal: 100svh;
+    }
+  }
+
+  @keyframes drop-mask {
+    to {
+      mask-image: none;
+    }
+  }
+
+  .chart__marks {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .chart__label,
+  .chart__place,
+  .chart__tick {
+    position: absolute;
+    white-space: nowrap;
+  }
+
+  .chart__label,
+  .chart__tick {
+    color: var(--color-ink-3);
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .chart__label--west {
+    translate: -100% 0;
+  }
+
+  .chart__place {
+    color: var(--color-ink);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  .chart__tick {
+    left: 574px;
+    translate: 0 -8px;
+    padding-right: 32px;
+  }
+
+  .chart__tick::after {
+    content: "";
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 12px;
+    height: 1px;
+    background: rgb(255 255 255 / 0.2);
+  }
+
+  .chart__light {
+    position: absolute;
+    top: -160px;
+    left: -160px;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(
+      closest-side,
+      rgb(46 124 168 / 0.3),
+      transparent
+    );
+    opacity: 0;
+    transition: opacity 0.25s;
+    will-change: transform;
+  }
+
+  .chart__ring {
+    position: absolute;
+    top: -7px;
+    left: -7px;
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--color-line-strong);
+    border-radius: 50%;
+    opacity: 0;
+  }
+
+  .chart__tip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 12px;
+    border: 1px solid var(--color-line);
+    border-radius: 10px;
+    background: rgb(20 20 22 / 0.8);
+    color: var(--color-ink-2);
+    font-size: 12px;
+    line-height: 16px;
+    white-space: nowrap;
+    opacity: 0;
+  }
+
+  .chart__tip strong {
+    color: var(--color-ink);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  .chart[data-active] .chart__light {
+    opacity: 1;
+  }
+
+  .chart[data-found] .chart__ring,
+  .chart[data-found] .chart__tip {
+    opacity: 1;
+  }
+
+  .equator {
+    top: 3074.5px;
+    left: 50%;
+    width: 100vw;
+    height: 1px;
+    translate: -50% 0;
+    background: var(--color-line-strong);
+    pointer-events: none;
+  }
+
+  .equator-label {
+    top: 3050px;
+    left: var(--margin);
+    color: var(--color-ink-3);
+    font-size: 12px;
+    line-height: 16px;
+  }
+</style>

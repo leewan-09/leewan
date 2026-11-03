@@ -1,0 +1,50 @@
+---
+import Analytics from "@vercel/analytics/astro";
+import { Font } from "astro:assets";
+import { LINKS, SITE } from "@/lib/content";
+import "@/styles/global.css";
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/og.png", Astro.site);
+const person = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: SITE.name,
+  jobTitle: SITE.jobTitle,
+  worksFor: { "@type": "Organization", name: SITE.employer },
+  url: canonical.href,
+  sameAs: [LINKS.github, LINKS.x, LINKS.telegram],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{SITE.title}</title>
+    <meta name="description" content={SITE.description} />
+    <meta name="theme-color" content="#000000" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={SITE.title} />
+    <meta property="og:description" content={SITE.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <Font cssVariable="--font-funnel-display" preload />
+    <Font cssVariable="--font-funnel-sans" />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(person)}
+    />
+    <Analytics />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

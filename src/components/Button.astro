@@ -1,0 +1,24 @@
+---
+interface Props {
+  href: string;
+  kind?: "primary" | "ghost";
+  class?: string;
+}
+
+const { href, kind = "primary", class: className } = Astro.props;
+const external = href.startsWith("http");
+---
+
+<a
+  href={href}
+  {...(external ? { target: "_blank", rel: "noopener" } : {})}
+  class:list={[
+    "inline-flex min-h-11 items-center justify-center rounded-full px-5 py-3 text-sm/5 font-medium whitespace-nowrap transition-colors",
+    kind === "primary"
+      ? "bg-white text-black hover:bg-white/85"
+      : "border border-line-strong text-ink hover:bg-white/10",
+    className,
+  ]}
+>
+  <slot />
+</a>

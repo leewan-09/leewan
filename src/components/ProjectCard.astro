@@ -1,0 +1,94 @@
+---
+import type { Project } from "@/lib/content";
+
+type Props = Project;
+
+const { name, summary, art, href } = Astro.props;
+const Tag = href ? "a" : "div";
+---
+
+<Tag
+  class="card group relative block overflow-hidden rounded-[20px] border border-line bg-raised transition-colors"
+  {...(href ? { href, target: "_blank", rel: "noopener" } : {})}
+>
+  <img
+    class="card__art h-[148px] w-full object-cover"
+    src={art}
+    alt=""
+    width="342"
+    height="148"
+    loading="lazy"
+    decoding="async"
+  />
+  <div class="card__fade" aria-hidden="true"></div>
+  {href && (
+    <svg
+      class="absolute top-3 right-3 text-line-strong transition-colors group-hover:text-white group-focus-visible:text-white"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M5 11 11 5M6 5h5v5"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  )}
+  <div class="relative flex flex-col gap-1 px-5 pt-4 pb-5">
+    <h3 class="font-display text-title text-ink">{name}</h3>
+    <p class="text-sm/5 text-ink-2">{summary}</p>
+  </div>
+</Tag>
+
+<style>
+  .card__art {
+    opacity: 0.85;
+    transition: opacity 0.2s;
+  }
+
+  a.card:hover .card__art,
+  a.card:focus-visible .card__art {
+    opacity: 1;
+  }
+
+  .card__fade {
+    position: absolute;
+    inset: 94px 0 auto;
+    height: 56px;
+    background: linear-gradient(transparent, var(--color-raised));
+    pointer-events: none;
+  }
+
+  a.card:hover {
+    border-color: var(--color-line-strong);
+  }
+
+  a.card:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+    border-radius: 20px;
+  }
+
+  a.card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at 60% 70%,
+      rgb(255 255 255 / 0.06),
+      transparent 65%
+    );
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+  }
+
+  a.card:hover::after {
+    opacity: 1;
+  }
+</style>

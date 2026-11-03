@@ -1,0 +1,126 @@
+---
+import chartUrl from "@/assets/chart/chart.svg?url";
+import meta from "@/assets/chart/meta.json";
+
+interface Mark {
+  text: string;
+  x: number;
+  y: number;
+  strong?: boolean;
+}
+
+interface Props {
+  /** Top and bottom of the window, in chart pixels. */
+  from: number;
+  to: number;
+  marks?: Mark[];
+  equator?: boolean;
+}
+
+const { from, to, marks = [], equator = false } = Astro.props;
+---
+
+<!-- Below the desktop breakpoint the chart appears in windows between sections. -->
+<div class="window" style={{ "--from": from, "--to": to }} aria-hidden="true">
+  <div class="window__map">
+    <img
+      src={chartUrl}
+      alt=""
+      width={meta.width}
+      height={meta.height}
+      decoding="async"
+      fetchpriority="high"
+    />
+    {marks.map((m) => (
+      <span
+        class:list={["window__mark", { "window__mark--strong": m.strong }]}
+        style={{ "--x": m.x, "--y": m.y }}
+      >
+        {m.text}
+      </span>
+    ))}
+  </div>
+  {equator && (
+    <div class="window__equator" style={{ "--y": meta.equatorY }}>
+      <span>The equator</span>
+    </div>
+  )}
+</div>
+
+<style>
+  .window {
+    --s: 0.62;
+    position: relative;
+    height: calc((var(--to) - var(--from)) * var(--s) * 1px);
+    margin-inline: calc(var(--margin) * -1);
+    overflow: hidden;
+    mask-image: linear-gradient(
+      transparent,
+      #000 56px,
+      #000 calc(100% - 56px),
+      transparent
+    );
+  }
+
+  @media (min-width: 40rem) {
+    .window {
+      --s: 1;
+    }
+  }
+
+  @media (min-width: 80rem) {
+    .window {
+      display: none;
+    }
+  }
+
+  .window__map {
+    position: absolute;
+    top: calc(var(--from) * var(--s) * -1px);
+    left: 50%;
+    width: calc(610px * var(--s));
+    height: calc(3409px * var(--s));
+    translate: -50% 0;
+  }
+
+  .window__map img {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+  }
+
+  .window__mark {
+    position: absolute;
+    top: calc(var(--y) * var(--s) * 1px);
+    left: calc(var(--x) * var(--s) * 1px);
+    color: var(--color-ink-3);
+    font-size: 12px;
+    line-height: 16px;
+    white-space: nowrap;
+  }
+
+  .window__mark--strong {
+    color: var(--color-ink);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  .window__equator {
+    position: absolute;
+    top: calc((var(--y) - var(--from)) * var(--s) * 1px);
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--color-line-strong);
+  }
+
+  .window__equator span {
+    position: absolute;
+    bottom: 8px;
+    left: var(--margin);
+    color: var(--color-ink-3);
+    font-size: 12px;
+    line-height: 16px;
+  }
+</style>
