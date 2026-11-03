@@ -35,6 +35,12 @@ export interface Project {
 /** Each card opens something a visitor can actually see. Other work goes in ALSO_BUILT. */
 export const PROJECTS: Project[] = [
   {
+    name: "Furaaqu",
+    summary: "Speedboat ticketing for daily routes",
+    art: noonu,
+    href: "https://furaaqu.com",
+  },
+  {
     name: "Barfume",
     summary: "Fragrance store and catalogue",
     art: kaafu,
@@ -45,12 +51,6 @@ export const PROJECTS: Project[] = [
     summary: "Speedboat booking platform",
     art: raa,
     href: "https://yoosufspeed.com",
-  },
-  {
-    name: "Furaaqu",
-    summary: "Speedboat ticketing for daily routes",
-    art: noonu,
-    href: "https://furaaqu.com",
   },
   {
     name: "TaxFlow",
