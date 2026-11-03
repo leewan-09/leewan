@@ -46,8 +46,8 @@ const mark = (name: string) => ({
             I build software for a country of 1,192 islands.
           </h1>
           <p class="mt-6 max-w-[520px] text-lead text-ink-2 xl:mt-8">
-            I’m Leewan, a full-stack engineer in the Maldives. More than five
-            years of building for the web and mobile, backend first.
+            I’m Leewan, a senior full-stack engineer in Malé. Six years of
+            building for the web and mobile, backend first.
           </p>
           <div class="mt-6 flex flex-wrap gap-3 xl:mt-8">
             <Button href="#work">View work</Button>
@@ -133,7 +133,16 @@ const mark = (name: string) => ({
             ))}
           </dl>
           <p class="mt-8 text-sm/5 text-ink-3 xl:mt-12">
-            Currently a full-stack developer at {SITE.employer}.
+            Currently building{" "}
+            <a
+              class="underline underline-offset-2 transition-colors hover:text-ink"
+              href={LINKS.kreating}
+              target="_blank"
+              rel="noopener"
+            >
+              {SITE.company}
+            </a>
+            .
           </p>
         </section>
       </div>
@@ -160,7 +169,7 @@ const mark = (name: string) => ({
         </p>
         <div class="mt-6 flex flex-col items-start gap-3 sm:flex-row">
           <Button href={LINKS.telegram}>Message me on Telegram</Button>
-          <Button href={LINKS.cv} kind="ghost">
+          <Button href={LINKS.cv} kind="ghost" download>
             Download CV
           </Button>
         </div>
@@ -170,7 +179,7 @@ const mark = (name: string) => ({
     <footer class="relative flex flex-col gap-2 px-(--margin) pt-16 pb-10 text-sm/5 text-ink-3 sm:flex-row sm:items-center sm:justify-between xl:pt-[124px]">
       <p>© 2026 {SITE.name}</p>
       <p>
-        Island data ©
+        Island data ©{" "}
         <a
           class="underline-offset-2 transition-colors hover:text-ink hover:underline"
           href={LINKS.osm}

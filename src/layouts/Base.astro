@@ -9,9 +9,14 @@ const ogImage = new URL("/og.png", Astro.site);
 const person = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: SITE.name,
+  name: SITE.fullName,
+  alternateName: SITE.name,
   jobTitle: SITE.jobTitle,
-  worksFor: { "@type": "Organization", name: SITE.employer },
+  worksFor: {
+    "@type": "Organization",
+    name: SITE.company,
+    url: LINKS.kreating,
+  },
   url: canonical.href,
   sameAs: [LINKS.github, LINKS.x, LINKS.telegram],
 };

@@ -2,16 +2,24 @@
 interface Props {
   href: string;
   kind?: "primary" | "ghost";
+  /** Save the file instead of opening it. */
+  download?: boolean;
   class?: string;
 }
 
-const { href, kind = "primary", class: className } = Astro.props;
+const {
+  href,
+  kind = "primary",
+  download = false,
+  class: className,
+} = Astro.props;
 const external = href.startsWith("http");
 ---
 
 <a
   href={href}
   {...(external ? { target: "_blank", rel: "noopener" } : {})}
+  {...(download ? { download: "" } : {})}
   class:list={[
     "inline-flex min-h-11 items-center justify-center rounded-full px-5 py-3 text-sm/5 font-medium whitespace-nowrap transition-colors",
     kind === "primary"

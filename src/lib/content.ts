@@ -7,18 +7,20 @@ import raa from "@/assets/chart/atoll-raa.svg?url";
 
 export const SITE = {
   name: "Leewan",
+  fullName: "Ahmed Leevan",
   title: "Leewan, full-stack engineer in the Maldives",
   description:
-    "I build software for a country of 1,192 islands. Full-stack engineer, backend first, with more than five years of building for the web and mobile.",
-  jobTitle: "Full-stack engineer",
-  employer: "Nine Sixteen",
+    "I build software for a country of 1,192 islands. Senior full-stack engineer in Malé, backend first, with six years of building for the web and mobile.",
+  jobTitle: "Senior full-stack engineer",
+  company: "Kreating",
 } as const;
 
 export const LINKS = {
   telegram: "https://t.me/toor09",
   github: "https://github.com/leewan-09",
   x: "https://x.com/leewan98",
-  cv: "https://drive.google.com/drive/folders/1obdkkB3U2eztMoiUAIwrEaTkGgwxpnyu?usp=sharing",
+  kreating: "https://kreating.co",
+  cv: "/Ahmed-Leevan-CV.pdf",
   osm: "https://www.openstreetmap.org/copyright",
 } as const;
 
@@ -30,46 +32,48 @@ export interface Project {
   href?: string;
 }
 
+/** Each card opens something a visitor can actually see. Other work goes in ALSO_BUILT. */
 export const PROJECTS: Project[] = [
   {
+    name: "Barfume",
+    summary: "Fragrance store and catalogue",
+    art: kaafu,
+    href: "https://barfumemv.com",
+  },
+  {
+    name: "Yoosuf Speed",
+    summary: "Speedboat booking platform",
+    art: raa,
+    href: "https://yoosufspeed.com",
+  },
+  {
     name: "Furaaqu",
-    summary: "Speedboat ticket booking",
+    summary: "Speedboat ticketing for daily routes",
     art: noonu,
     href: "https://furaaqu.com",
   },
   {
-    name: "Maahdhaa4",
-    summary: "Public engagement platform",
-    art: kaafu,
-    href: "https://maahdhaa4.com",
-  },
-  {
-    name: "Dhivehi Maps",
-    summary: "World map app in Dhivehi",
-    art: laamu,
-  },
-  {
-    name: "Silver Oasis",
-    summary: "Guest house website",
+    name: "TaxFlow",
+    summary: "Invoice photos into tax statements",
     art: ari,
-    href: "https://silveroasismaldives.com",
+    href: "https://taxflow.run",
   },
   {
-    name: "Apex Logistics",
-    summary: "Company website",
-    art: raa,
-    href: "https://apexlogistics.mv",
+    name: "Basvaaru",
+    summary: "Platform behind a Dhivehi learning app",
+    art: laamu,
+    href: "https://play.google.com/store/apps/details?id=com.thestudypoint.basvaaru",
   },
   {
-    name: "NineSixteen",
-    summary: "Company website",
+    name: "PDF service",
+    summary: "Rust HTML-to-PDF service",
     art: addu,
-    href: "https://ninesixteen.mv",
+    href: "https://github.com/leewan-09/html-to-pdf",
   },
 ];
 
 export const ALSO_BUILT =
-  "Also built: Furaaqu Naalu, Wellness Raagu, Silversmoke, Salesco, ILM Vidhaaraa, Dhivehi Calendar and Youtu.Bio.";
+  "Also built: Hukit, Kreating HQ, Naalu, Dhivehi Maps, Dhivehi Calendar, Wellness Raagu and a ride-hailing API.";
 
 export const PRINCIPLES = [
   {
@@ -87,8 +91,8 @@ export const PRINCIPLES = [
 ];
 
 export const TOOLS = [
-  { title: "Backend", list: "NestJS, Express, tRPC" },
-  { title: "Data", list: "PostgreSQL, Prisma, MongoDB" },
-  { title: "Frontend", list: "Next.js, Nuxt, Tailwind CSS" },
-  { title: "Mobile and ops", list: "Flutter, Docker, GitHub Actions" },
+  { title: "Backend", list: "NestJS, tRPC, Hono" },
+  { title: "Data", list: "PostgreSQL, Prisma, Drizzle, Redis" },
+  { title: "Frontend", list: "Next.js, TanStack Start, Tailwind CSS" },
+  { title: "Mobile and ops", list: "Expo, Flutter, Docker, GitHub Actions" },
 ];
