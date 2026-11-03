@@ -1,31 +1,41 @@
 ---
 import { SITE } from "@/lib/content";
+
+const link =
+  "relative z-1 rounded-full border border-transparent px-2 py-2 text-ink-2 transition-colors hover:text-ink aria-[current=location]:text-ink min-[350px]:px-2.5 sm:px-3";
 ---
 
 <header class="pointer-events-none fixed inset-x-0 top-4 z-20 xl:top-6">
-  <div class="mx-auto max-w-[1440px] px-(--margin)">
+  <div class="mx-auto flex max-w-[1440px] justify-center px-(--margin) xl:justify-start">
     <nav
       aria-label="Main"
-      class="nav pointer-events-auto inline-flex items-center gap-3 rounded-full border border-line py-2 pr-2 pl-4 text-sm/5 min-[350px]:gap-5 min-[350px]:pl-5 sm:gap-8 sm:pl-6"
+      data-nav
+      class="nav pointer-events-auto relative flex w-full items-center justify-between gap-0.5 rounded-full border border-line py-2 pr-2 pl-3.5 text-sm/5 min-[350px]:gap-1 min-[350px]:pl-5 sm:w-auto sm:justify-start sm:gap-2 sm:pl-6"
     >
-      <a href="#top" class="font-medium text-ink">
+      <span class="nav__pill" data-nav-pill aria-hidden="true"></span>
+      <a href="#top" class="relative z-1 mr-1 font-medium text-ink sm:mr-3">
         {SITE.name}
       </a>
-      <a href="#work" class="text-ink-2 transition-colors hover:text-ink">
+      <a href="#work" data-nav-link class={link}>
         Work
       </a>
-      <a href="#about" class="text-ink-2 transition-colors hover:text-ink">
+      <a href="#about" data-nav-link class={link}>
         About
       </a>
       <a
         href="#contact"
-        class="rounded-full border border-line-strong px-4 py-2 font-medium text-ink transition-colors hover:bg-white/10"
+        data-nav-link
+        class="relative z-1 rounded-full border border-line-strong px-3 py-2 font-medium text-ink transition-colors hover:bg-white/10 min-[350px]:px-4"
       >
         Contact
       </a>
     </nav>
   </div>
 </header>
+
+<script>
+  import "@/scripts/nav";
+</script>
 
 <style>
   .nav {
@@ -36,6 +46,27 @@ import { SITE } from "@/lib/content";
     .nav {
       background: rgb(20 20 22 / 0.6);
       backdrop-filter: blur(24px);
+    }
+  }
+
+  /* Stays hidden until the script places it, so the nav works without JavaScript. */
+  .nav__pill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.12);
+    opacity: 0;
+    transition:
+      transform 0.35s cubic-bezier(0.3, 0.1, 0.3, 1),
+      width 0.35s cubic-bezier(0.3, 0.1, 0.3, 1),
+      opacity 0.2s;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav__pill {
+      transition: none;
     }
   }
 </style>
